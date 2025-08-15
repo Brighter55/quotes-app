@@ -1,0 +1,19 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #274c77;
+    font-family: Arial;
+}
+
+#root {
+    min-width: 60%;
+    background-color: #e7ecef;
+    text-align: center;
+}
+
