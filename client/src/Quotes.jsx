@@ -2,17 +2,19 @@ import React, {useEffect, useState} from "react"
 
 
 function Quotes() {
-    const [quotes, setQuotes] = useState({});
+    const [quotes, setQuotes] = useState([]);
     // when app mounts, get list of qoutes from Flask
     useEffect(() => {
-        fetch("http://localhost:5000/api/quotes", {method: "GET"});
+        fetch("http://localhost:5000/api/quotes", {method: "GET"})
         .then(response => response.json())
-        .then(data => setQuotes(data.qoutes))
+        .then(data => setQuotes(data))
         .catch(error => console.error("Fetching error: ", error));
-    }, []);
+    }, [])
 
     return (
-        <h2>Quote1</h2> // placeholder
+        <div className="quotes">
+            {quotes.length > 0 ? <h1>Quote: {quotes[0]["quote"]} and Author: {quotes[0]["author"]}</h1> : "no quote yet"}
+        </div>
     );
 }
 
