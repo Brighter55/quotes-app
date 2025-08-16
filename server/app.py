@@ -30,7 +30,7 @@ def send_quotes():
     User_objects = db.session.execute(db.select(User)).scalars().all()
     quotes = []
     for quote in User_objects:
-        quotes.append({"quote": quote.quote, "author": quote.author})
+        quotes.append({"quote": quote.quote, "author": quote.author, "id": quote.id})
     return jsonify(quotes) # return it to React
 
 
