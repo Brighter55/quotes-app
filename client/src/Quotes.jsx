@@ -13,7 +13,12 @@ function Quotes() {
 
     return (
         <div className="quotes">
-            {quotes.length > 0 ? <h1>Quote: {quotes[0]["quote"]} and Author: {quotes[0]["author"]}</h1> : "no quote yet"}
+            {quotes.map((quote) => (
+                                <div className="quote" key={quote.id}>
+                                    <h3>{quote.quote}</h3>
+                                    <h4>By {quote.author}</h4>
+                                </div>
+        ))}
         </div>
     );
 }

@@ -16,8 +16,8 @@ function Header() {
 
     return (
         <header>
-          <h1>Quotes <img onClick={handleAddQuote} src={add} alt="add sign" style={{width: "19px", height: "19px"}}/></h1>
-          <hr style={{height: "3px", backgroundColor: "grey"}}></hr>
+          <h1 style={{margin: 0, padding: "25px 0"}}>Quotes <img onClick={handleAddQuote} src={add} alt="add sign" style={{width: "19px", height: "19px"}}/></h1>
+          <hr style={{height: "3px", backgroundColor: "#E7ECEF"}}></hr>
         </header>
     );
 }
