@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-
+import xMark from "./assets/X-mark.png"
 
 function Quotes() {
     const [quotes, setQuotes] = useState([]);
@@ -15,6 +15,9 @@ function Quotes() {
         <div className="quotes">
             {quotes.map((quote) => (
                                 <div className="quote" key={quote.id}>
+                                    <div className="X-mark-container">
+                                        <img src={xMark} className="X-mark"/>
+                                    </div>
                                     <h3>{quote.quote}</h3>
                                     <h4>By {quote.author}</h4>
                                 </div>
