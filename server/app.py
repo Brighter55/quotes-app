@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
@@ -24,8 +24,17 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route("/api/quotes")
+@app.route("/api/quotes", methods=["GET", "POST"])
 def send_quotes():
+    # add data to DB
+    if request.method == "POST":
+        data = request.json
+        if data:
+            quote = data.get("quote")
+            author = data.get("author")
+            new_quote = User(quote=quote, author=author)
+            db.session.add(new_quote)
+            db.session.commit()
     #get data from postgresDB
     User_objects = db.session.execute(db.select(User)).scalars().all()
     quotes = []
