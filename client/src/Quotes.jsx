@@ -9,7 +9,7 @@ function Quotes() {
         .then(response => response.json())
         .then(data => setQuotes(data))
         .catch(error => console.error("Fetching error: ", error));
-    }, [])
+    });
 
     return (
         <div className="quotes">
