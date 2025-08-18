@@ -42,7 +42,12 @@ def send_quotes():
         quotes.append({"quote": quote.quote, "author": quote.author, "id": quote.id})
     return jsonify(quotes) # return it to React
 
-
+@app.route("/api/remove", methods=["POST"])
+def remove():
+    user_id = request.json.get("id")
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
 
 if __name__ == "__main__":
     app.run(debug=True)
