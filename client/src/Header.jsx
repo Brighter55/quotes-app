@@ -27,15 +27,16 @@ function Header() {
     return (
         <header>
           <h1 style={{margin: 0, padding: "25px 0"}}>Quotes <img onClick={() => {setShowForm(!showForm)}} src={add} alt="add sign" style={{width: "19px", height: "19px"}}/></h1>
-          <hr style={{height: "3px", backgroundColor: "#E7ECEF"}}></hr>
-
           {showForm && (
-            <form onSubmit={handleSubmit}>
-                <label>Quote: <input value={quote} onChange={(event) => {setQuote(event.target.value)}} /></label>
-                <label>By: <input value={author} onChange={(event) => {setAuthor(event.target.value)}} /></label>
-                <input type="submit" />
+            <form onSubmit={handleSubmit} className="addForm">
+                <label className="addFormItems">Quote: <input value={quote} onChange={(event) => {setQuote(event.target.value)}} style={{height: "100%"}} /></label>
+                <label className="addFormItems">By: <input value={author} onChange={(event) => {setAuthor(event.target.value)}} style={{height: "100%"}} /></label>
+                <input className="addFormItems" type="submit" value="add" style={{width: "100px", cursor: "pointer"}} />
             </form>
             )}
+          <hr style={{height: "3px", backgroundColor: "#E7ECEF"}}></hr>
+
+
         </header>
     );
 }
