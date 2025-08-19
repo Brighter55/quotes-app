@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
 import xMark from "./assets/X-mark.png"
 
-function Quotes() {
+function Quotes(props) {
     const [quotes, setQuotes] = useState([]);
-    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
 
     // when app mounts, get list of qoutes from Flask
@@ -12,7 +11,7 @@ function Quotes() {
         .then(response => response.json())
         .then(data => setQuotes(data))
         .catch(error => console.error("Fetching error: ", error));
-    }, [refreshTrigger]);
+    }, [props.refreshTrigger]);
 
 
     async function handleXClicked(user_id) {
@@ -25,7 +24,7 @@ function Quotes() {
         } catch (error) {
             console.error('Error:', error);
         }
-        setRefreshTrigger(r => r + 1);
+        props.setRefreshTrigger(r => r + 1);
     }
 
     return (

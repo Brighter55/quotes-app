@@ -1,7 +1,7 @@
 import add from "./assets/add.png"
 import React, {useState} from "react"
 
-function Header() {
+function Header(props) {
     const [showForm, setShowForm] = useState(false);
     const [quote, setQuote] = useState("");
     const [author, setAuthor] = useState("");
@@ -9,19 +9,24 @@ function Header() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const formData = {"quote": quote,
-                    "author": author,
-                    };
-        try {
-            const response = await fetch("http://localhost:5000/api/quotes", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(formData),
-            });
-        } catch (error) {
-            console.error('Error:', error);
+        if (quote != "" && author != "") {
+            const formData = {"quote": quote,
+                        "author": author,
+                        };
+            try {
+                const response = await fetch("http://localhost:5000/api/quotes", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(formData),
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            setShowForm(!showForm);
+            setQuote("");
+            setAuthor("");
+            props.setRefreshTrigger(r => r + 1);
         }
-        setShowForm(!showForm);
     }
 
     return (
