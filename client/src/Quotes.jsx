@@ -3,15 +3,19 @@ import xMark from "./assets/X-mark.png"
 
 function Quotes() {
     const [quotes, setQuotes] = useState([]);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+
     // when app mounts, get list of qoutes from Flask
     useEffect(() => {
         fetch("http://localhost:5000/api/quotes", {method: "GET"})
         .then(response => response.json())
         .then(data => setQuotes(data))
         .catch(error => console.error("Fetching error: ", error));
-    });
+    }, [refreshTrigger]);
 
-    async function handleXClicked(event, user_id) {
+
+    async function handleXClicked(user_id) {
         try {
             await fetch("http://localhost:5000/api/remove", {
             method: "POST",
@@ -21,7 +25,7 @@ function Quotes() {
         } catch (error) {
             console.error('Error:', error);
         }
-
+        setRefreshTrigger(r => r + 1);
     }
 
     return (
@@ -29,7 +33,7 @@ function Quotes() {
             {quotes.map((quote) => (
                                 <div className="quote" key={quote.id}>
                                     <div className="X-mark-container">
-                                        <img onClick={() => handleXClicked(event, quote.id)} src={xMark} className="X-mark"/>
+                                        <img onClick={() => handleXClicked(quote.id)} src={xMark} className="X-mark"/>
                                     </div>
                                     <h3>{quote.quote}</h3>
                                     <h4>By {quote.author}</h4>
